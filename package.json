@@ -1,0 +1,57 @@
+{
+  "name": "jungle-nft-marketplace",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test tests/auth.spec.ts tests/catalog.spec.ts tests/checkout.spec.ts tests/interactions.spec.ts tests/realtime-and-idempotency.spec.ts tests/scenarios.spec.ts tests/gallery.spec.ts tests/ui-regressions.spec.ts tests/figma-flows.spec.ts",
+    "lint": "node scripts/lint.cjs",
+    "check": "npm run typecheck && npm run build",
+    "test:e2e:ui": "playwright test --ui",
+    "setup:mock": "msw init public --save",
+    "predev": "npm run setup:mock",
+    "prebuild": "npm run setup:mock",
+    "test:visual": "playwright test tests/visual.spec.ts",
+    "test:visual:update": "playwright test tests/visual.spec.ts --update-snapshots",
+    "verify": "npm run lint && npm run typecheck && npm run test:core && npm run build && npm run test:e2e",
+    "audit:lighthouse": "node scripts/lighthouse-audit.mjs",
+    "test:core": "node scripts/check-core.mjs",
+    "test:gallery": "playwright test tests/gallery.spec.ts",
+    "test:ui": "playwright test tests/ui-regressions.spec.ts"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.90.0",
+    "@tanstack/react-router": "^1.132.0",
+    "@tailwindcss/vite": "^4.1.0",
+    "axios": "^1.12.0",
+    "lucide-react": "^0.468.0",
+    "msw": "^2.11.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "socket.io-client": "^4.8.0",
+    "tailwindcss": "^4.1.0",
+    "@mswjs/socket.io-binding": "^0.2.0",
+    "@radix-ui/react-slot": "^1.2.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^22.18.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "typescript": "^5.9.0",
+    "vite": "^6.3.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  }
+}
